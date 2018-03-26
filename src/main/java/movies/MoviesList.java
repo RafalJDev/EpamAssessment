@@ -1,5 +1,6 @@
 package movies;
 
+import movies.movie.Movie;
 import sun.nio.cs.ext.ISCII91;
 
 import java.util.ArrayList;
@@ -10,7 +11,7 @@ import java.util.List;
  */
 public class MoviesList {
 
-  private static List<String> listOfMovies = new ArrayList<String>();
+  private static List<Movie> listOfMovies = new ArrayList<Movie>();
 
   private static MoviesList ourInstance = new MoviesList();
 
@@ -21,15 +22,15 @@ public class MoviesList {
   private MoviesList() {
   }
 
-  public static List<String> getListOfMovies() {
+  public static List<Movie> getListOfMovies() {
     return listOfMovies;
   }
 
-  public static void setListOfMovies(List<String> listOfMovies) {
+  public static void setListOfMovies(List<Movie> listOfMovies) {
     MoviesList.listOfMovies = listOfMovies;
   }
 
-  public void addMovieToTheList(String movie) {
+  public void addMovieToTheList(Movie movie) {
     listOfMovies.add(movie);
   }
 }

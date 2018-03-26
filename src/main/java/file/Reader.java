@@ -1,4 +1,6 @@
-package reader;
+package file;
+
+import movies.MoviePattern;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -11,24 +13,31 @@ import java.io.IOException;
 public class Reader {
 
   private String filePathToReadFrom;
-  private final String FILENAME = "MoviesList.txt";
+  private String fileName;//= "MoviesList.txt";
 
   private BufferedReader br = null;
   private FileReader fr = null;
 
-  public void readTxtFile() {
+  public void readTxtFile(String fileName) {
+
+    if (fileName == null) {
+      throw new NullPointerException();
+    }
+    this.fileName = fileName;
 
     findPathForParsedFileByName(System.getProperty("user.dir"));
 
     try {
-      //br = new BufferedReader(new FileReader(FILENAME));
+      //br = new BufferedReader(new FileReader(fileName));
       fr = new FileReader(filePathToReadFrom);
       br = new BufferedReader(fr);
 
       String sCurrentLine;
 
       while ((sCurrentLine = br.readLine()) != null) {
-        System.out.println(sCurrentLine);
+        if (MoviePattern.checkIfMovieHasCorrectPattern(sCurrentLine)) {
+          System.out.println(sCurrentLine);
+        }
       }
     } catch (IOException e) {
       e.printStackTrace();
@@ -53,7 +62,7 @@ public class Reader {
     File[] fList = directory.listFiles();
     for (File file : fList) {
       if (file.isFile()) {
-        if (file.getAbsolutePath().contains(FILENAME)) {
+        if (file.getAbsolutePath().contains(fileName)) {
           filePathToReadFrom = file.getAbsolutePath().trim();
         }
       } else if (file.isDirectory()) {
