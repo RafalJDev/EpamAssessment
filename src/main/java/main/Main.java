@@ -1,13 +1,6 @@
 package main;
 
-import console.ConsoleReader;
 import controller.Controller;
-import file.Reader;
-import movies.MovieFinder;
-import movies.movie.Movie;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Jaszczynski.Rafal on 27.02.2018.
@@ -15,6 +8,8 @@ import java.util.List;
 public class Main {
 
   public static void main(String[] args) {
+
+    System.out.println("Print " + System.getProperty("user.dir"));
 
     Controller controller = new Controller(args[0]);
     controller.runParser();

@@ -25,7 +25,8 @@ public class Reader {
       throw new NullPointerException();
     }
     this.fileName = fileName;
-    findPathForParsedFileByName(System.getProperty("user.dir"));
+//    findPathForParsedFileByName(System.getProperty("user.dir"));
+    findPathForParsedFileByName("D:\\Programowanko\\jaszc\\Intelij_projects\\EpamAssessment");
   }
 
   public List<String> readTxtFile() {

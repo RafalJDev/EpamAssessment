@@ -2,6 +2,9 @@ package console;
 
 import com.sun.org.apache.regexp.internal.RE;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Scanner;
 
 /**
@@ -9,13 +12,16 @@ import java.util.Scanner;
  */
 public class ConsoleReader {
 
-  Scanner in;
-
   public ConsoleReader() {
-    in = new Scanner(System.in);
   }
 
-  public String readCommand() {
-    return in.next();
+  public String readCommand() throws IOException {
+
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    System.out.print("Enter String");
+    System.out.println();
+
+    String s = br.readLine();
+    return s;
   }
 }

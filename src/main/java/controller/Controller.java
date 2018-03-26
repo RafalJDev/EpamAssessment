@@ -1,10 +1,13 @@
 package controller;
 
+import commands.Command;
+import commands.CommandFactory;
 import console.ConsoleReader;
 import file.Reader;
 import movies.MovieFinder;
 import movies.movie.Movie;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,9 +17,11 @@ import java.util.List;
 public class Controller {
 
   private List<Movie> movieList;
+  private List<Movie> filtredMovieList;
   String arg;
   String command;
   ConsoleReader consoleReader;
+  Command commandToExecute;
 
   public Controller(String arg) {
     this.arg = arg;
@@ -27,9 +32,21 @@ public class Controller {
   public void runParser() {
     getAllMovies();
 
-    while (command != "exit") {
+    filtredMovieList=movieList;
+    boolean exit = false;
+    while (exit == false){
       getCommand();
+
+      prepareCommand();
+
+      executeCommand();
+
+      if (command.equals("exit")) {
+        exit = true;
+      }
     }
+
+    System.exit(0);
   }
 
   public void getAllMovies() {
@@ -48,6 +65,21 @@ public class Controller {
   }
 
   public void getCommand() {
-    command = consoleReader.readCommand();
+    try {
+      command = consoleReader.readCommand();
+    } catch (IOException e) {
+      System.out.println("Something wrong with command line");
+      e.printStackTrace();
+    }
+  }
+
+  public void prepareCommand() {
+    commandToExecute = CommandFactory.getCommand(command);
+  }
+
+  public void executeCommand() {
+    if (commandToExecute != null) {
+      commandToExecute.execute(filtredMovieList);
+    }
   }
 }
