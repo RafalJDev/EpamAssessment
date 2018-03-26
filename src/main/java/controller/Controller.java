@@ -37,7 +37,6 @@ public class Controller {
   public void runParser() {
     getAllMovies();
 
-
     boolean exit = false;
     while (exit == false) {
       if (filteredMovieList == null) {
@@ -51,21 +50,17 @@ public class Controller {
         prepareCommand();
         executeCommand();
       }
-
       if (command.equals("exit")) {
         exit = true;
       }
     }
-
     System.out.println("Exit program");
     System.exit(0);
   }
 
   public void getAllMovies() {
     Reader reader = new Reader(arg);
-
     List<String> linesList = reader.readTxtFile();
-
     MovieFinder mpc = new MovieFinder();
 
     for (String line : linesList) {
