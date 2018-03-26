@@ -1,3 +1,4 @@
+import reader.Reader;
 import test.TestClass;
 
 /**
@@ -6,16 +7,8 @@ import test.TestClass;
 public class Main {
 
   public static void main(String[] args) {
-    System.out.println("say hello from here");
 
-    TestClass testClass = new TestClass();
-    testClass.saySth();
-
-    testMe();
+    Reader reader = new Reader();
+    reader.readTxtFile();
   }
-
-  public static void testMe() {
-    System.out.println("next test");
-  }
-
 }
