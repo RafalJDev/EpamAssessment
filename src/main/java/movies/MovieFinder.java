@@ -14,21 +14,19 @@ public class MovieFinder {
 
   private final String movieTitlePattern = "(.+)";
   private final String yearPattern = "(\\d{4})";
-  private final String avergeRatingPattern = "(\\d+\\.\\d+)";
+  private final String averageRatingPattern = "(\\d+\\.\\d+)";
   private final String countOfRatingsPattern = "(\\d+)";
 
   private final Pattern pattern = Pattern.compile(
      "\\(" +
         movieTitlePattern + "," +
         yearPattern + "," +
-        avergeRatingPattern + "," +
+        averageRatingPattern + "," +
         countOfRatingsPattern
         + "\\)");
 
   public Movie searchForMovieWithRegex(String movieLine) {
-
     //\((.+),(\d{4}),(\d+\.\d+),(\d+)\)
-
     Matcher matcher = pattern.matcher(movieLine);
 
     if (matcher.find()) {

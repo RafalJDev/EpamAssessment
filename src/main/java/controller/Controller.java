@@ -30,7 +30,7 @@ public class Controller {
 
   public Controller(String arg) {
     this.arg = arg;
-    movieList = new ArrayList<Movie>();
+    movieList = new ArrayList<>();
     consoleReader = new ConsoleReader();
   }
 
@@ -109,5 +109,9 @@ public class Controller {
     if (commandToExecute != null) {
       filteredMovieList = commandToExecute.execute(filteredMovieList, commandArgument);
     }
+  }
+
+  public List<Movie> getMovieList() {
+    return movieList;
   }
 }
