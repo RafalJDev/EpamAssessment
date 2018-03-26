@@ -1,11 +1,11 @@
 package file;
 
-import movies.MoviePattern;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Jaszczynski.Rafal on 26.03.2018.
@@ -13,12 +13,14 @@ import java.io.IOException;
 public class Reader {
 
   private String filePathToReadFrom;
-  private String fileName;//= "MoviesList.txt";
+  private String fileName;
 
   private BufferedReader br = null;
   private FileReader fr = null;
 
-  public void readTxtFile(String fileName) {
+  private List<String> linesList = new ArrayList<String>();
+
+  public List<String> readTxtFile(String fileName) {
 
     if (fileName == null) {
       throw new NullPointerException();
@@ -33,17 +35,15 @@ public class Reader {
       br = new BufferedReader(fr);
 
       String sCurrentLine;
-
       while ((sCurrentLine = br.readLine()) != null) {
-        if (MoviePattern.checkIfMovieHasCorrectPattern(sCurrentLine)) {
-          System.out.println(sCurrentLine);
-        }
+        linesList.add(sCurrentLine);
       }
     } catch (IOException e) {
       e.printStackTrace();
     } finally {
       closeReader();
     }
+    return linesList;
   }
 
   public void closeReader() {
