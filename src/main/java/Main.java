@@ -10,6 +10,12 @@ public class Main {
 
     TestClass testClass = new TestClass();
     testClass.saySth();
+
+    testMe();
+  }
+
+  public static void testMe() {
+    System.out.println("next test");
   }
 
 }
