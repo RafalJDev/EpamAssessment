@@ -20,17 +20,16 @@ public class Reader {
 
   private List<String> linesList = new ArrayList<String>();
 
-  public List<String> readTxtFile(String fileName) {
-
+  public Reader(String fileName) {
     if (fileName == null) {
       throw new NullPointerException();
     }
     this.fileName = fileName;
-
     findPathForParsedFileByName(System.getProperty("user.dir"));
+  }
 
+  public List<String> readTxtFile() {
     try {
-      //br = new BufferedReader(new FileReader(fileName));
       fr = new FileReader(filePathToReadFrom);
       br = new BufferedReader(fr);
 

@@ -9,9 +9,13 @@ import java.util.Scanner;
  */
 public class ConsoleReader {
 
-  public void readConsole() {
-    Scanner in = new Scanner(System.in);
+  Scanner in;
 
-    String consoleLine = in.next();
+  public ConsoleReader() {
+    in = new Scanner(System.in);
+  }
+
+  public String readCommand() {
+    return in.next();
   }
 }
