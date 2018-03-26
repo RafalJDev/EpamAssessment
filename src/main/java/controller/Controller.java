@@ -33,9 +33,12 @@ public class Controller {
   public void runParser() {
     getAllMovies();
 
-    filteredMovieList = movieList;
+
     boolean exit = false;
     while (exit == false) {
+      if (filteredMovieList == null) {
+        filteredMovieList = movieList;
+      }
       getCommand();
 
       prepareCommand();
