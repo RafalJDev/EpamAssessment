@@ -14,6 +14,12 @@ public class CommandFactory {
       commandToExecute = new FilterByRatingBetterThanCommand();
     } else if (command.equals("Reset")) {
       commandToExecute = new ResetCommand();
+    } else if (command.equals("FilterByRatingWorseThan")) {
+      commandToExecute = new FilterByRatingWorseThanCommand();
+    } else if (command.equals("FilterByYearOfProduction")) {
+      commandToExecute = new FilterByYearOfProductionCommand();
+    } else if (command.equals("ShowTitles")) {
+      commandToExecute = new ShowTitlesCommand();
     } else {
       if (!command.equals("exit"))
         System.out.println("There is no such command: " + command);

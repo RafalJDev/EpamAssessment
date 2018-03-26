@@ -9,7 +9,9 @@ import movies.movie.Movie;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Jaszczynski.Rafal on 26.03.2018.
@@ -19,10 +21,12 @@ public class Controller {
   private List<Movie> movieList;
   private List<Movie> filteredMovieList;
   String arg;
-  String command;
-  String consoleArgument;
+  String command = "";
+  String commandArgument;
   ConsoleReader consoleReader;
   Command commandToExecute;
+
+  Map<String, String> consoleArguments;
 
   public Controller(String arg) {
     this.arg = arg;
@@ -39,11 +43,14 @@ public class Controller {
       if (filteredMovieList == null) {
         filteredMovieList = movieList;
       }
-      getCommand();
+      getCommands();
 
-      prepareCommand();
-
-      executeCommand();
+      for (Map.Entry<String, String> consoleArgument : consoleArguments.entrySet()) {
+        command = consoleArgument.getKey();
+        commandArgument = consoleArgument.getValue();
+        prepareCommand();
+        executeCommand();
+      }
 
       if (command.equals("exit")) {
         exit = true;
@@ -69,7 +76,8 @@ public class Controller {
     }
   }
 
-  public void getCommand() {
+  public void getCommands() {
+    consoleArguments = new HashMap<>();
     String line = null;
     try {
       line = consoleReader.readCommand().trim();
@@ -79,13 +87,22 @@ public class Controller {
     }
     String[] arguments = line.split(" ");
 
-
-    command = arguments[0];
-
-    if (arguments.length == 2) {
-      consoleArgument = arguments[1];
-    } else {
-      consoleArgument = null;
+    boolean breakIt = false;
+    for (int i = 0; i < arguments.length; i += 2) {
+      if (arguments.length % 2 == 1) {
+        if (i == arguments.length - 2) {
+          breakIt = true;
+        }
+      }
+      String first = arguments[i];
+      String second = "";
+      if (arguments.length % 2 == 0) {
+        second = arguments[i + 1];
+      }
+      consoleArguments.put(first, second);
+      if (breakIt) {
+        break;
+      }
     }
   }
 
@@ -95,7 +112,7 @@ public class Controller {
 
   public void executeCommand() {
     if (commandToExecute != null) {
-      filteredMovieList = commandToExecute.execute(filteredMovieList, consoleArgument);
+      filteredMovieList = commandToExecute.execute(filteredMovieList, commandArgument);
     }
   }
 }

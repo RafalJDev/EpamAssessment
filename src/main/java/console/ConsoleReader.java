@@ -18,11 +18,11 @@ public class ConsoleReader {
   public String readCommand() throws IOException {
 
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-    System.out.print("Enter String");
+    System.out.print("Your command?");
     System.out.println();
 
     String s = br.readLine();
-    System.out.println();
+//    System.out.println();
 
     return s;
   }
