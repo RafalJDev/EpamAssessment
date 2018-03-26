@@ -11,5 +11,5 @@ public abstract class Command {
 
   public static String commandName;
 
-  public abstract void execute(List<Movie> movieList);
+  public abstract List<Movie> execute(List<Movie> movieList, String argument);
 }

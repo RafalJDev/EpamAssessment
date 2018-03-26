@@ -22,6 +22,8 @@ public class ConsoleReader {
     System.out.println();
 
     String s = br.readLine();
+    System.out.println();
+
     return s;
   }
 }

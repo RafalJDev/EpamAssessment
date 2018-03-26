@@ -10,10 +10,13 @@ public class CommandFactory {
     Command commandToExecute = null;
     if (command.equals("ShowMovieCount")) {
       commandToExecute = new ShowMovieCountCommand();
-    } else if (command.equals("sbfdb")) {
+    } else if (command.equals("FilterByRatingBetterThan")) {
+      commandToExecute = new FilterByRatingBetterThanCommand();
+    } else if (command.equals("Reset")) {
+      commandToExecute = new ResetCommand();
     } else {
-      System.out.println("You did enter wrong command: " + command);
-
+      if (!command.equals("exit"))
+        System.out.println("There is no such command: " + command);
     }
 
     return commandToExecute;

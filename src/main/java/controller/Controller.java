@@ -17,9 +17,10 @@ import java.util.List;
 public class Controller {
 
   private List<Movie> movieList;
-  private List<Movie> filtredMovieList;
+  private List<Movie> filteredMovieList;
   String arg;
   String command;
+  String consoleArgument;
   ConsoleReader consoleReader;
   Command commandToExecute;
 
@@ -32,9 +33,9 @@ public class Controller {
   public void runParser() {
     getAllMovies();
 
-    filtredMovieList=movieList;
+    filteredMovieList = movieList;
     boolean exit = false;
-    while (exit == false){
+    while (exit == false) {
       getCommand();
 
       prepareCommand();
@@ -46,6 +47,7 @@ public class Controller {
       }
     }
 
+    System.out.println("Exit program");
     System.exit(0);
   }
 
@@ -65,11 +67,22 @@ public class Controller {
   }
 
   public void getCommand() {
+    String line = null;
     try {
-      command = consoleReader.readCommand();
+      line = consoleReader.readCommand().trim();
     } catch (IOException e) {
       System.out.println("Something wrong with command line");
       e.printStackTrace();
+    }
+    String[] arguments = line.split(" ");
+
+
+    command = arguments[0];
+
+    if (arguments.length == 2) {
+      consoleArgument = arguments[1];
+    } else {
+      consoleArgument = null;
     }
   }
 
@@ -79,7 +92,7 @@ public class Controller {
 
   public void executeCommand() {
     if (commandToExecute != null) {
-      commandToExecute.execute(filtredMovieList);
+      filteredMovieList = commandToExecute.execute(filteredMovieList, consoleArgument);
     }
   }
 }
